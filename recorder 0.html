@@ -1,39 +1,33 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-<meta charset="UTF-8">
-<title>Ruffle SWF 中文示範</title>
+<HTML>
+<HEAD>
+<meta http-equiv=Content-Type content="text/html; charset=Big5">
+<TITLE>recorder 0</TITLE>
 
-<!-- 背景黑色 -->
-<style>
-  body { margin:0; background-color:#000000; }
-  ruffle-player { width:100%; height:100%; display:block; }
-</style>
-
-<!-- 載入 Ruffle Web Player -->
+<!-- ✅ 加入 Ruffle -->
 <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-
 <script>
-  // 初始化 Ruffle
-  window.RufflePlayer = window.RufflePlayer || {};
-  window.RufflePlayer.config = window.RufflePlayer.config || {};
-
-  // 指定外部字型來源 (TTF)
-  window.RufflePlayer.config.fontSources = [
-    "https://gsyan888.github.io/fonts/Noto Sans TC Regular.ttf"
-  ];
-
-  // 如果 SWF 裡使用了系統字型（optional）
-  window.RufflePlayer.config.defaultFonts = {
-    sans: ["Noto Sans TC Regular"]
-  };
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+        fontSources: ["https://gsyan888.github.io/fonts/NotoSansTC-Regular.ttf"],
+        defaultFonts: {
+            sans: ["Noto Sans TC Regular"]
+        }
+    };
 </script>
+</HEAD>
 
-</head>
-<body>
+<BODY bgcolor="#000000">
 
-<!-- 播放 SWF -->
-<ruffle-player src="recorder 0.swf"></ruffle-player>
+<OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+ codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+ WIDTH="100%" HEIGHT="100%" id="recorder0" ALIGN="">
+    <PARAM NAME=movie VALUE="recorder 0.swf">
+    <PARAM NAME=quality VALUE=high>
+    <PARAM NAME=bgcolor VALUE=#000000>
+    <EMBED src="recorder 0.swf" quality=high bgcolor=#000000 WIDTH="100%" HEIGHT="100%" NAME="recorder0" ALIGN=""
+     TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer">
+    </EMBED>
+</OBJECT>
 
-</body>
-</html>
+</BODY>
+</HTML>
