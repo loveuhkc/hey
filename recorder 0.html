@@ -1,71 +1,130 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-<meta charset="utf-8" />
-<title>recorder 0</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Flash 全螢幕播放</title>
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    height: 100%;
+  body { 
+    margin: 0; 
+    background-color: #000; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     overflow: hidden;
+    color: white;
+    font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
   }
-  #flash-container {
-    width: 100%;
-    height: 100%;
+  #flashContainer {
+    width: 960px;
+    height: 540px;
   }
-  #fullscreen-btn {
+  #fullscreenBtn {
     position: fixed;
     bottom: 15px;
     right: 15px;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.5);
-    color: #fff;
-    padding: 8px 12px;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  #fullscreenBtn:hover {
+    background-color: #0056b3;
+  }
+  #notice {
+    position: fixed;
+    bottom: 70px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 300px;
+  }
+  #downloadBtn {
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 8px 14px;
+    background-color: #28a745;
+    color: white;
+    border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
-    z-index: 9999;
-    transition: background 0.3s;
   }
-  #fullscreen-btn:hover {
-    background: rgba(255,255,255,0.4);
+  #downloadBtn:hover {
+    background-color: #1e7e34;
+  }
+  #closeNotice {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  #closeNotice:hover {
+    color: #ff4444;
   }
 </style>
 </head>
-
 <body>
-  <div id="flash-container"></div>
-  <button id="fullscreen-btn">全螢幕</button>
 
-  <!-- 載入 Ruffle -->
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const ruffle = window.RufflePlayer.newest();
-    const player = ruffle.createPlayer();
-    const container = document.getElementById("flash-container");
-    container.appendChild(player);
-    player.load("recorder 0.swf");
+<div id="flashContainer">
+  <object id="myFlash" type="application/x-shockwave-flash" data="yourmovie.swf" width="100%" height="100%">
+    <param name="movie" value="yourmovie.swf">
+    <param name="allowFullScreen" value="true">
+    <param name="allowScriptAccess" value="always">
+  </object>
+</div>
 
-    // 嘗試自動全螢幕
-    player.addEventListener("loadeddata", () => {
-      const el = player.shadowRoot ? player.shadowRoot.querySelector("ruffle-player") || player : player;
-      if (el.requestFullscreen) {
-        el.requestFullscreen().catch(() => {});
-      }
-    });
+<div id="notice">
+  <button id="closeNotice" title="關閉">✕</button>
+  ruffle 執行本程式容易產生聲音延遲，<br>
+  如果感覺聲音延遲明顯，可連到雲端硬碟下載完整檔案到您的電腦播放。
+  <br>
+  <button id="downloadBtn">我要下載</button>
+</div>
 
-    // 手動全螢幕按鈕
-    document.getElementById("fullscreen-btn").addEventListener("click", () => {
-      const el = player.shadowRoot ? player.shadowRoot.querySelector("ruffle-player") || player : player;
-      if (el.requestFullscreen) {
-        el.requestFullscreen();
-      }
-    });
-  });
-  </script>
+<button id="fullscreenBtn">全螢幕</button>
+
+<script>
+  // 自動嘗試全螢幕
+  window.onload = function() {
+    setTimeout(() => {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) elem.requestFullscreen();
+      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+      else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
+      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+    }, 1000);
+  };
+
+  // 手動全螢幕按鈕
+  document.getElementById('fullscreenBtn').onclick = function() {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) elem.requestFullscreen();
+    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
+    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+  };
+
+  // 我要下載按鈕（替換為你的實際雲端連結）
+  document.getElementById('downloadBtn').onclick = function() {
+    window.open("https://drive.google.com/your_link_here", "_blank");
+  };
+
+  // 關閉提示框
+  document.getElementById('closeNotice').onclick = function() {
+    document.getElementById('notice').style.display = "none";
+  };
+</script>
+
 </body>
 </html>
