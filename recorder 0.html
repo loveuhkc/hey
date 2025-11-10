@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>Flash 全螢幕播放</title>
+<title>recorder 0 - Ruffle 全螢幕播放</title>
 <style>
   body { 
     margin: 0; 
@@ -16,7 +16,7 @@
     color: white;
     font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
   }
-  #flashContainer {
+  #flash-container {
     width: 960px;
     height: 540px;
   }
@@ -76,54 +76,61 @@
 </head>
 <body>
 
-<div id="flashContainer">
-  <object id="myFlash" type="application/x-shockwave-flash" data="yourmovie.swf" width="100%" height="100%">
-    <param name="movie" value="yourmovie.swf">
-    <param name="allowFullScreen" value="true">
-    <param name="allowScriptAccess" value="always">
-  </object>
-</div>
+<div id="flash-container"></div>
 
 <div id="notice">
   <button id="closeNotice" title="關閉">✕</button>
   ruffle 執行本程式容易產生聲音延遲，<br>
-  如果感覺聲音延遲明顯，可連到雲端硬碟下載完整檔案到您的電腦播放。
+  如果感覺聲音延遲明顯，可連到雲端硬碟下載完整檔案到您的電腦播放(延遲較少)。
   <br>
   <button id="downloadBtn">我要下載</button>
 </div>
 
 <button id="fullscreenBtn">全螢幕</button>
 
+<!-- 載入 Ruffle -->
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 <script>
-  // 自動嘗試全螢幕
-  window.onload = function() {
-    setTimeout(() => {
-      const elem = document.documentElement;
-      if (elem.requestFullscreen) elem.requestFullscreen();
-      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-      else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
-      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-    }, 1000);
-  };
+document.addEventListener("DOMContentLoaded", function () {
+  // 建立 Ruffle 播放器
+  const ruffle = window.RufflePlayer.newest();
+  const player = ruffle.createPlayer();
+  const container = document.getElementById("flash-container");
+  container.appendChild(player);
+  player.style.width = "100%";
+  player.style.height = "100%";
 
-  // 手動全螢幕按鈕
-  document.getElementById('fullscreenBtn').onclick = function() {
+  // 載入 SWF
+  player.load("recorder 0.swf");
+
+  // 自動全螢幕
+  setTimeout(() => {
     const elem = document.documentElement;
     if (elem.requestFullscreen) elem.requestFullscreen();
     else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
     else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
     else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-  };
+  }, 1200);
+});
 
-  // 我要下載按鈕（替換為你的實際雲端連結）
-  document.getElementById('downloadBtn').onclick = function() {
-    window.open("https://drive.google.com/your_link_here", "_blank");
-  };
+// 手動全螢幕按鈕
+document.getElementById('fullscreenBtn').onclick = function() {
+  const elem = document.documentElement;
+  if (elem.requestFullscreen) elem.requestFullscreen();
+  else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+  else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
+  else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+};
 
-  // 關閉提示框
-  document.getElementById('closeNotice').onclick = function() {
-    document.getElementById('notice').style.display = "none";
-  };
+// 我要下載按鈕（請換成你的雲端連結）
+document.getElementById('downloadBtn').onclick = function() {
+  window.open("https://drive.google.com/drive/folders/1LH1nGE7shG_P3LVydxLfUDoJaevqcqqy?usp=drive_link", "_blank");
+};
+
+// 關閉提示框
+document.getElementById('closeNotice').onclick = function() {
+  document.getElementById('notice').style.display = "none";
+};
 </script>
 
 </body>
