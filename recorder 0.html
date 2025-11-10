@@ -38,9 +38,9 @@
 
 <body>
   <div id="flash-container"></div>
-  <button id="fullscreen-btn">¥þ¿Ã¹õ</button>
+  <button id="fullscreen-btn">å…¨èž¢å¹•</button>
 
-  <!-- ¸ü¤J Ruffle -->
+  <!-- è¼‰å…¥ Ruffle -->
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
   <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -50,7 +50,7 @@
     container.appendChild(player);
     player.load("recorder 0.swf");
 
-    // ¹Á¸Õ¦Û°Ê¥þ¿Ã¹õ
+    // å˜—è©¦è‡ªå‹•å…¨èž¢å¹•
     player.addEventListener("loadeddata", () => {
       const el = player.shadowRoot ? player.shadowRoot.querySelector("ruffle-player") || player : player;
       if (el.requestFullscreen) {
@@ -58,7 +58,7 @@
       }
     });
 
-    // ¤â°Ê¥þ¿Ã¹õ«ö¶s
+    // æ‰‹å‹•å…¨èž¢å¹•æŒ‰éˆ•
     document.getElementById("fullscreen-btn").addEventListener("click", () => {
       const el = player.shadowRoot ? player.shadowRoot.querySelector("ruffle-player") || player : player;
       if (el.requestFullscreen) {
