@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>recorder 0 - 全螢幕 Ruffle 播放</title>
+<title>quiz搶答 - 全螢幕 Ruffle 播放</title>
 <style>
   html, body {
     margin: 0;
@@ -70,9 +70,9 @@
 
 <div id="notice">
   <button id="closeNotice" title="關閉">✕</button>
-  本網頁使用Ruffle模擬執行程式，容易產生聲音延遲，<br>
-  如果感覺聲音延遲明顯，可連到雲端硬碟下載完整檔案架構到您的電腦播放。
-  <br>
+ 本程式針對大屏幕或是感應式投影設計，非多點觸控。<br>
+ 若屏幕為紅外線感應式，可使用軟棒在遠距離點擊畫面。<br>
+  如果想要自訂題庫與音樂，可連到雲端硬碟下載完整檔案架構到您的電腦修改。<br>
   <button id="downloadBtn">我要下載</button>
 </div>
 
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 我要下載按鈕（請改成你的雲端連結）
 document.getElementById('downloadBtn').onclick = function() {
-  window.open("https://drive.google.com/drive/folders/1LH1nGE7shG_P3LVydxLfUDoJaevqcqqy?usp=drive_link", "_blank");
+  window.open("https://drive.google.com/drive/folders/1QQZ0obxAVd9dWuRwJ0J9sOBvdvjmC-cU?usp=drive_link", "_blank");
 };
 
 // 關閉提示框
